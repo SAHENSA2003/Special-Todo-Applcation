@@ -27,10 +27,14 @@ function RunTheApplication() {
     }
     updateButtonText();
     window.addEventListener('resize', updateButtonText);
-
+    
     function ClearInputValues() {
         select('#taskTitle').value = '';
         select('#taskDescription').value = '';
+    }
+
+    function focusOnTitle(){
+        select('#taskTitle').focus();
     }
     function addTasks(title, desc, columnName) {
         let div = document.createElement('div');
@@ -49,9 +53,11 @@ function RunTheApplication() {
             draggedElement = div;
         })
 
+
+
         const deleteButton = div.querySelector('.delete');
         deleteButton.addEventListener('click', () => {
-            let Confirm = confirm('Are you sure to delete!!');
+            let Confirm = confirm(`Are you sure to delete (${div.querySelector('h1').textContent}) !!`);
             if (!Confirm) {
                 return
             }
@@ -65,13 +71,13 @@ function RunTheApplication() {
         EditButton.addEventListener('click', () => {
             Adding = false;
             currentTask = div;
-         
-            const currentTitle=div.querySelector('h1').textContent;
-            const currentDescription=div.querySelector('p').textContent;
 
+            const currentTitle = div.querySelector('h1').textContent;
+            const currentDescription = div.querySelector('p').textContent;
             select('.modal').classList.toggle('active');
             select('#taskTitle').value = currentTitle;
             select('#taskDescription').value = currentDescription;
+            focusOnTitle();
             select('#addTask').textContent = 'update';
         })
 
@@ -179,6 +185,7 @@ function RunTheApplication() {
         Adding = true;
         Modal.classList.toggle('active');
         select('#addTask').textContent = 'Add task';
+        focusOnTitle();
     }
     addButton.addEventListener('click', addTaskModal);
 
@@ -203,7 +210,8 @@ function RunTheApplication() {
         const DescValue = select('#taskDescription').value;
         if (Adding === true) {
             if (TitleValue === '' || DescValue === '') {
-                alert('fill all the information first!!!')
+                alert('fill all the information first!!!');
+                focusOnTitle();
                 return
             }
 
@@ -217,6 +225,7 @@ function RunTheApplication() {
         if (!Adding) {
             if (TitleValue === '' || DescValue === '') {
                 alert('fill all the information first!!!')
+                focusOnTitle();
                 return
             }
             EditTask();
