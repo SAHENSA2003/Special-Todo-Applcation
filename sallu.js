@@ -15,7 +15,7 @@ function RunTheApplication() {
     let currentTask = null;
     let Adding = false;
     let draggedElement = null;
-    
+
     const AddButton = select('#addNewTask')
     function updateButtonText() {
         if (window.innerWidth <= 600) {
@@ -27,6 +27,11 @@ function RunTheApplication() {
     }
     updateButtonText();
     window.addEventListener('resize', updateButtonText);
+
+    function ClearInputValues() {
+        select('#taskTitle').value = '';
+        select('#taskDescription').value = '';
+    }
     function addTasks(title, desc, columnName) {
         let div = document.createElement('div');
         div.classList.add('task');
@@ -56,13 +61,17 @@ function RunTheApplication() {
         });
 
         const EditButton = div.querySelector('.Edit');
+
         EditButton.addEventListener('click', () => {
             Adding = false;
-
             currentTask = div;
+         
+            const currentTitle=div.querySelector('h1').textContent;
+            const currentDescription=div.querySelector('p').textContent;
+
             select('.modal').classList.toggle('active');
-            select('#taskTitle').value = title;
-            select('#taskDescription').value = desc;
+            select('#taskTitle').value = currentTitle;
+            select('#taskDescription').value = currentDescription;
             select('#addTask').textContent = 'update';
         })
 
@@ -85,6 +94,7 @@ function RunTheApplication() {
 
         })
     }
+
     function EditTask() {
         if (!currentTask) return;
 
@@ -98,10 +108,7 @@ function RunTheApplication() {
         currentTask = null;
 
         select('#addTask').textContent = 'Add';
-        select('#taskTitle').value = '';
-        select('#taskDescription').value = '';
         Modal.classList.remove('active');
-
         updateTasksCount();
     }
 
@@ -167,6 +174,7 @@ function RunTheApplication() {
     const Modal = select('.modal');
     const addButton = select('#addNewTask');
     const bg = select('.bg');
+
     function addTaskModal() {
         Adding = true;
         Modal.classList.toggle('active');
@@ -183,8 +191,7 @@ function RunTheApplication() {
 
     bg.addEventListener('click', () => {
         Modal.classList.remove('active');
-        select('#taskTitle').value = '';
-        select('#taskDescription').value = '';
+        ClearInputValues();
     })
 
     // add task button event
@@ -202,11 +209,9 @@ function RunTheApplication() {
 
             addTasks(TitleValue, DescValue, Todo);
 
-
             updateTasksCount();
             Modal.classList.remove('active');
-            select('#taskTitle').value = "";
-            select('#taskDescription').value = "";
+            ClearInputValues();
         }
 
         if (!Adding) {
@@ -214,10 +219,11 @@ function RunTheApplication() {
                 alert('fill all the information first!!!')
                 return
             }
-            EditTask(TitleValue, DescValue, Todo)
+            EditTask();
+            ClearInputValues();
         }
     })
-    
+
 }
 
 
