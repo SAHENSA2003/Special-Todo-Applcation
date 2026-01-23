@@ -15,6 +15,8 @@ function RunTheApplication() {
     let currentTask = null;
     let Adding = false;
     let draggedElement = null;
+    const DeleteIcon=`<svg height='15px' width='15px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffff"><path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM6 10V20H18V10H6ZM9 12H11V18H9V12ZM13 12H15V18H13V12ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9Z"></path></svg>`;
+    const EditIcon=`<svg height='15px' width='15px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffff"><path d="M15.7279 9.57627L14.3137 8.16206L5 17.4758V18.89H6.41421L15.7279 9.57627ZM17.1421 8.16206L18.5563 6.74785L17.1421 5.33363L15.7279 6.74785L17.1421 8.16206ZM7.24264 20.89H3V16.6473L16.435 3.21231C16.8256 2.82179 17.4587 2.82179 17.8492 3.21231L20.6777 6.04074C21.0682 6.43126 21.0682 7.06443 20.6777 7.45495L7.24264 20.89Z"></path></svg>`;
 
     const AddButton = select('#addNewTask')
     function updateButtonText() {
@@ -44,8 +46,8 @@ function RunTheApplication() {
         div.innerHTML = ` <h1>${title}</h1>
                         <p>${desc} </p>
                         <div class="EDbutton">
-                         <button class='Edit'>Edit</button>
-                         <button class='delete'>Delete</button>
+                         <button title='Edit' class='Edit'>${EditIcon}</button>
+                         <button title='Delete' class='delete'>${DeleteIcon}</button>
                         </div>`
 
         columnName.appendChild(div);

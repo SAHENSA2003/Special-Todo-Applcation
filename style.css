@@ -93,19 +93,24 @@ section .task_column .task {
     display: flex;
     justify-content: flex-end;
     gap: var(--gutter-md);
-    margin-top: var(--margin-xl);
+    margin-top: var(--margin-sm);
 }
 
 section .task_column .task .EDbutton button {
     cursor: pointer;
-    padding: var(--padding-sm) var(--padding-md);
+    padding: var(--padding-sm) var(--padding-sm);
     border-radius: var(--radius-md);
     border: none;
     outline: none;
     color: var(--font-primary-color);
-    background-color: var(--bg-delete-color);
+    background: none;
 }
-
+section .task_column .task .EDbutton .delete:hover{
+    background-color: #fd5b5be0;
+}
+section .task_column .task .EDbutton .Edit:hover{
+    background-color: #02cf02;
+}
 .modal {
     position: fixed;
     width: 100vw;
@@ -179,12 +184,12 @@ section .task_column .task .EDbutton button {
 
     section .task_column {
         width: 25vw;
-        flex-grow: .5;
         overflow: scroll;
         height: 80%;
     }
     section .task_column .heading{
         padding: var(--padding-sm);
+        font-size: 10px;
     }
     section .task_column .task{
         font-size: 10px;
@@ -193,14 +198,14 @@ section .task_column .task .EDbutton button {
         font-size: medium;
     }
    .EDbutton{
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 0;
     gap: 5px;
    }
     .EDbutton button{
-        font-size: 10px;
-        padding: var(--padding-sm) var(--padding-sm);
-        gap: 5px;
+        font-size: 8px;
+        padding: 0;
+        gap: 3px;
     }
 }
 
